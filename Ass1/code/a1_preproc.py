@@ -88,6 +88,7 @@ def main(args):
             # TODO: process the body field (j['body']) with preproc1(...) using default for `steps` argument
             # TODO: replace the 'body' field with the processed text
                 processed_data["body"] = preproc1(comment_d["body"], [1, 2, 3, 4, 5])
+                processed_data["originalBody"] = comment_d["body"]
             # TODO: append the result to 'allOutput'
                 allOutput.append(processed_data)
     fout = open(args.output, 'w')
