@@ -42,14 +42,13 @@ def preproc1(comment , steps=range(1, 5)):
     # adding tag and changing to lemma
     for sent in utt.sents:
         for token in sent:
-            print(token)
+            # print(token)
             lemma = token.lemma_
             if token.lemma_[0] == '-':
                 lemma = token.text
             word = lemma + "/" + token.tag_
             modCom_list.append(word)
         modCom_list.append("\n")
-        A[2]
     modComm = ""
     modCom_list = modCom_list[:-1]
     for word in modCom_list:
