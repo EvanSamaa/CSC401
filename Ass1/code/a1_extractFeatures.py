@@ -172,8 +172,17 @@ def extract2(feats, comment_class, comment_id):
         feats : numpy Array, a 173-length vector of floating point features (this 
         function adds feature 30-173). This should be a modified version of 
         the parameter feats.
-    '''    
-    print('TODO')
+    '''
+    if comment_class == "Left":
+        feat_per_comment = LEFT_NPARR[LEFT_DICT[comment_id],:]
+    elif comment_class == "Right":
+        feat_per_comment = RIGHT_NPARR[RIGHT_DICT[comment_id],:]
+    elif comment_class == "Center":
+        feat_per_comment = CENTER_NPARR[CENTER_DICT[comment_id],:]
+    elif comment_class == "Alt":
+        feat_per_comment = ALT_NPARR[ALT_DICT[comment_id],:]
+    print(feat_per_comment)
+    A[1]
 
 def load_feats():
     f = open("/u/cs401/A1/feats/Alt_IDs.txt", "r")
@@ -197,9 +206,9 @@ def load_feats():
         CENTER_DICT[id] = index
     f.close()
     ALT_NPARR = np.load("/u/cs401/A1/feats/Alt_feats.dat.npy")
-    print(ALT_NPARR.shape)
-    A[2]
-
+    RIGHT_NPARR = np.load("/u/cs401/A1/feats/Right_feats.dat.npy")
+    LEFT_NPARR = np.load("/u/cs401/A1/feats/Left_feats.dat.npy")
+    CENTER_NPARR = np.load("/u/cs401/A1/feats/Center_feats.dat.npy")
 def load_norms():
     bristo_norm = "/u/cs401/Wordlists/BristolNorms+GilhoolyLogie.csv"
     bristo_norm = "./Premade/BristolNorms+GilhoolyLogie.csv"
@@ -240,8 +249,6 @@ def load_norms():
                 thing = True
     # TODO: Use extract1 to find the first 29 features for each
     WARRINER_DICT = warriner_norm
-
-
 def main(args):
 
     load_feats()
@@ -253,7 +260,7 @@ def main(args):
     classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3}
     for i in range (0, len(data)):
         feat_per_comment = extract1(data[i])
-        extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
+        feat_per_comment = extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
         feats[i, :] = np.append(feat_per_comment, classes[data[i]["cat"]])
         # A[2]
     # data point. Add these to feats.
