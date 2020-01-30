@@ -212,6 +212,10 @@ def load_feats():
     RIGHT_NPARR = np.load("/u/cs401/A1/feats/Right_feats.dat.npy")
     LEFT_NPARR = np.load("/u/cs401/A1/feats/Left_feats.dat.npy")
     CENTER_NPARR = np.load("/u/cs401/A1/feats/Center_feats.dat.npy")
+    print(ALT_NPARR.shape)
+    print(RIGHT_NPARR.shape)
+    print(LEFT_NPARR.shape)
+    print(CENTER_NPARR.shape)
 def load_norms():
     bristo_norm = "/u/cs401/Wordlists/BristolNorms+GilhoolyLogie.csv"
     bristo_norm = "./Premade/BristolNorms+GilhoolyLogie.csv"
