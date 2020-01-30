@@ -35,7 +35,7 @@ def extract1(comment):
     '''    
     # TODO: Extract features that rely on capitalization.
     rtv = np.zeros((173,))
-    print(json.dumps(comment, indent=4))
+    # print(json.dumps(comment, indent=4))
     # 1. Count caps
     for item in comment["originalBody"].split():
         if not item.islower():
@@ -166,13 +166,18 @@ def extract2(feats, comment_class, comment_id):
 
 
 def main(args):
+
+    f = open("/u/cs401/A1/feats/Alt_IDs", "r")
+    print(f.read())
+    A[2]
+
     data = json.load(open(args.input))
     feats = np.zeros((len(data), 173+1))
     #obtain dictionaries that contains the AOA and Warriner data
     bristo_norm = "/u/cs401/Wordlists/BristolNorms+GilhoolyLogie.csv"
-    bristo_norm = "./BristolNorms+GilhoolyLogie.csv"
+    bristo_norm = "./Premade/BristolNorms+GilhoolyLogie.csv"
     warriner_norm = "/u/cs401/Wordlists/Ratings Warriner et al.csv"
-    warriner_norm = "./Ratings_Warriner_et_al.csv"
+    warriner_norm = "./Premade/Ratings_Warriner_et_al.csv"
     bristo_norm_dict = {}
     warriner_norm_dict = {}
     with open(bristo_norm, newline='') as csvfile:
@@ -209,13 +214,17 @@ def main(args):
     # TODO: Use extract1 to find the first 29 features for each
     WARRINER_DICT = warriner_norm
 
-    # extract1(data[6])
-    extract2()
+    classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3}
+    print()
+    for i in range (0, len(data)):
+        feat_per_comment = extract1(data[i])
+        extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
+        feats[i, :] = np.append(feat_per_comment, classes[data[i]["cat"]])
+        # A[2]
     # data point. Add these to feats.
     # TODO: Use extract2 to copy LIWC features (features 30-173)
     # into feats. (Note that these rely on each data point's class,
     # which is why we can't add them in extract1).
-    print('TODO')
     np.savez_compressed(args.output, feats)
     
 if __name__ == "__main__": 
