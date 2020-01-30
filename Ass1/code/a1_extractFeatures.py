@@ -179,7 +179,7 @@ def extract2(feats, comment_class, comment_id):
 def main(args):
 
     f = open("/u/cs401/A1/feats/Alt_IDs.txt", "r")
-    temp = f.read().split("/n")
+    temp = f.read().split("\n")
     for id,index in zip(temp, range(0,len(temp))):
         ALT_DICT[id] = index
     print(ALT_DICT)
