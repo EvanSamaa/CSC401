@@ -175,19 +175,32 @@ def extract2(feats, comment_class, comment_id):
     '''    
     print('TODO')
 
-
-def main(args):
-
+def load_feats():
     f = open("/u/cs401/A1/feats/Alt_IDs.txt", "r")
     temp = f.read().split("\n")
     for id,index in zip(temp, range(0,len(temp))):
         ALT_DICT[id] = index
-    print(ALT_DICT)
-    A[1]
+    f.close()
+    f = open("/u/cs401/A1/feats/Right_IDs.txt", "r")
+    temp = f.read().split("\n")
+    for id, index in zip(temp, range(0, len(temp))):
+        RIGHT_DICT[id] = index
+    f.close()
+    f = open("/u/cs401/A1/feats/Left_IDs.txt", "r")
+    temp = f.read().split("\n")
+    for id, index in zip(temp, range(0, len(temp))):
+        LEFT_DICT[id] = index
+    f.close()
+    f = open("/u/cs401/A1/feats/Center_IDs.txt", "r")
+    temp = f.read().split("\n")
+    for id, index in zip(temp, range(0, len(temp))):
+        CENTER_DICT[id] = index
+    f.close()
+    ALT_NPARR = np.load("/u/cs401/A1/feats/Alt_feats.dat.npy")
+    print(ALT_NPARR.shape)
+    A[2]
 
-    data = json.load(open(args.input))
-    feats = np.zeros((len(data), 173+1))
-    #obtain dictionaries that contains the AOA and Warriner data
+def load_norms():
     bristo_norm = "/u/cs401/Wordlists/BristolNorms+GilhoolyLogie.csv"
     bristo_norm = "./Premade/BristolNorms+GilhoolyLogie.csv"
     warriner_norm = "/u/cs401/Wordlists/Ratings Warriner et al.csv"
@@ -227,6 +240,15 @@ def main(args):
                 thing = True
     # TODO: Use extract1 to find the first 29 features for each
     WARRINER_DICT = warriner_norm
+
+
+def main(args):
+
+    load_feats()
+    load_norms()
+    data = json.load(open(args.input))
+    feats = np.zeros((len(data), 173+1))
+    #obtain dictionaries that contains the AOA and Warriner data
 
     classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3}
     for i in range (0, len(data)):
