@@ -266,7 +266,10 @@ def main(args):
     for i in range (0, len(data)):
         feat_per_comment = extract1(data[i])
         print(i)
-        feat_per_comment = extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
+        try:
+            feat_per_comment = extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
+        except:
+            print(data[i])
         feats[i, :] = np.append(feat_per_comment, classes[data[i]["cat"]])
     # data point. Add these to feats.
     # TODO: Use extract2 to copy LIWC features (features 30-173)
