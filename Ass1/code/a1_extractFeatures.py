@@ -21,7 +21,9 @@ PUNCTUATION = {
     '$', '#', '"', '"', '(', ')', ',', '.', ':', 'XX', '``', "''", "-LRB-",
     '-RRB-', 'ADD', 'AFX', 'HYPH'
 }
-
+AOA_IMG_FAM_DICT = {}
+WARRINER_DICT = {}
+# extract the first 29 features, returns an array
 def extract1(comment):
     ''' This function extracts features from a single comment
 
@@ -64,6 +66,12 @@ def extract1(comment):
             elif punc_counter >= 2:
                 punc_counter = -1
     word_count = 0
+    aoa_arr = np.array((0,))
+    img_arr = np.array((0,))
+    fam_arr = np.array((0,))
+    v_mean_arr = np.array((0,))
+    a_mean_arr = np.array((0,))
+    d_mean_arr = np.array((0,))
     for token in tokens:
         word = token.split("/")[0].lower()
         prop = token.split("/")[1]
@@ -102,21 +110,46 @@ def extract1(comment):
         if not prop in PUNCTUATION:
             rtv[15] = rtv[15] + len(word)
             word_count = word_count + 1
-
-        # counte average sentence length
+        # get AOA, IMG and FAM
+        try:
+            scores = AOA_IMG_FAM_DICT[word]
+            print(scores)
+            aoa_arr = np.append(aoa_arr, scores[0])
+            img_arr = np.append(img_arr, scores[1])
+            fam_arr = np.append(fam_arr, scores[2])
+        except:
+            pass
+        # get the other scores
+        try:
+            scores = WARRINER_DICT[word]
+            v_mean_arr = np.append(v_mean_arr, scores[0])
+            a_mean_arr = np.append(a_mean_arr, scores[1])
+            d_mean_arr = np.append(d_mean_arr, scores[2])
+        except:
+            pass
     for sentence in comment["body"].split("\n"):
         rtv[14] = rtv[14] + len(sentence.split())
     rtv[14] = rtv[14]/len(comment["body"].split("\n"))
     # calculate avg
     rtv[15] = rtv[15]/word_count
     rtv[16] = len(comment["body"].split("\n"))
-    print(rtv)
-    # TODO: Lowercase the text in comment. Be careful not to lowercase the tags. (e.g. "Dog/NN" -> "dog/NN").
-    # TODO: Extract features that do not rely on capitalization.
+    if aoa_arr.shape[0] != 1:
+        rtv[17] = np.average(aoa_arr[1:])
+        rtv[18] = np.average(img_arr[1:])
+        rtv[19] = np.average(fam_arr[1:])
+        rtv[20] = np.std(aoa_arr[1:])
+        rtv[21] = np.std(img_arr[1:])
+        rtv[22] = np.std(fam_arr[1:])
+    if v_mean_arr.shape[0] != 1:
+        rtv[23] = np.average(v_mean_arr[1:])
+        rtv[24] = np.average(a_mean_arr[1:])
+        rtv[25] = np.average(d_mean_arr[1:])
+        rtv[26] = np.std(v_mean_arr[1:])
+        rtv[27] = np.std(a_mean_arr[1:])
+        rtv[28] = np.std(d_mean_arr[1:])
     # print('TODO')
+    # print(rtv)
     return rtv
-    
-    
 def extract2(feats, comment_class, comment_id):
     ''' This function adds features 30-173 for a single comment.
 
@@ -135,33 +168,55 @@ def extract2(feats, comment_class, comment_id):
 def main(args):
     data = json.load(open(args.input))
     feats = np.zeros((len(data), 173+1))
+    #obtain dictionaries that contains the AOA and Warriner data
     bristo_norm = "/u/cs401/Wordlists/BristolNorms+GilhoolyLogie.csv"
     bristo_norm = "./BristolNorms+GilhoolyLogie.csv"
+    warriner_norm = "/u/cs401/Wordlists/Ratings Warriner et al.csv"
+    warriner_norm = "./Ratings_Warriner_et_al.csv"
     bristo_norm_dict = {}
+    warriner_norm_dict = {}
     with open(bristo_norm, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',',)
         thing = False
         for row in reader:
             if thing:
-                entry = []
-                entry.append(float(row[3]))
-                entry.append(float(row[4]))
-                entry.append(float(row[5]))
-                bristo_norm_dict[row[1]] = entry
+                try:
+                    entry = []
+                    entry.append(int(row[3]))
+                    entry.append(int(row[4]))
+                    entry.append(int(row[5]))
+                    bristo_norm_dict[row[1]] = entry
+                except:
+                    pass
             else:
                 thing = True
-
+    AOA_IMG_FAM_DICT = bristo_norm_dict
+    with open(warriner_norm, newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',',)
+        thing = False
+        for row in reader:
+            if thing:
+                try:
+                    entry = []
+                    entry.append(float(row[2]))
+                    entry.append(float(row[5]))
+                    entry.append(float(row[8]))
+                    warriner_norm_dict[row[1]] = entry
+                except:
+                    pass
+            else:
+                thing = True
     # TODO: Use extract1 to find the first 29 features for each
-    extract1(data[6])
-    print()
+    WARRINER_DICT = warriner_norm
+
+    # extract1(data[6])
+    extract2()
     # data point. Add these to feats.
     # TODO: Use extract2 to copy LIWC features (features 30-173)
     # into feats. (Note that these rely on each data point's class,
     # which is why we can't add them in extract1).
     print('TODO')
-
     np.savez_compressed(args.output, feats)
-
     
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser(description='Process each .')
