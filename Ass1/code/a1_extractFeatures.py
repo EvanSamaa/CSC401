@@ -23,6 +23,17 @@ PUNCTUATION = {
 }
 AOA_IMG_FAM_DICT = {}
 WARRINER_DICT = {}
+
+ALT_DICT = {}
+RIGHT_DICT = {}
+LEFT_DICT = {}
+CENTER_DICT = {}
+
+ALT_NPARR = np.zeros((1,))
+RIGHT_NPARR = np.zeros((1,))
+LEFT_NPARR = np.zeros((1,))
+CENTER_NPARR = np.zeros((1,))
+
 # extract the first 29 features, returns an array
 def extract1(comment):
     ''' This function extracts features from a single comment
@@ -168,8 +179,11 @@ def extract2(feats, comment_class, comment_id):
 def main(args):
 
     f = open("/u/cs401/A1/feats/Alt_IDs.txt", "r")
-    print(f.read())
-    A[2]
+    temp = f.read().split("/n")
+    for id,index in zip(temp, range(0,len(temp))):
+        ALT_DICT[id] = index
+    print(ALT_DICT)
+    A[1]
 
     data = json.load(open(args.input))
     feats = np.zeros((len(data), 173+1))
@@ -215,7 +229,6 @@ def main(args):
     WARRINER_DICT = warriner_norm
 
     classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3}
-    print()
     for i in range (0, len(data)):
         feat_per_comment = extract1(data[i])
         extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
