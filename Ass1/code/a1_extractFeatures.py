@@ -179,7 +179,6 @@ def extract2(feats, comment_class, comment_id):
         feat_per_comment = RIGHT_NPARR[RIGHT_DICT[comment_id],:]
     elif comment_class == "Center":
         feat_per_comment = CENTER_NPARR[CENTER_DICT[comment_id], :]
-        print(CENTER_NPARR[CENTER_DICT[comment_id],:].shape)
     elif comment_class == "Alt":
         feat_per_comment = ALT_NPARR[ALT_DICT[comment_id],:]
     feats = np.concatenate((feats[0:29], CENTER_NPARR[CENTER_DICT[comment_id], :]))
@@ -266,6 +265,7 @@ def main(args):
     classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3}
     for i in range (0, len(data)):
         feat_per_comment = extract1(data[i])
+        print(i)
         feat_per_comment = extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
         feats[i, :] = np.append(feat_per_comment, classes[data[i]["cat"]])
     # data point. Add these to feats.
