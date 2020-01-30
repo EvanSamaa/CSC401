@@ -187,6 +187,7 @@ def extract2(feats, comment_class, comment_id):
     print(feat_per_comment)
     A[1]
 
+# loads the features ((N, 144) arrays) into the programs
 def load_feats():
     f = open("/u/cs401/A1/feats/Alt_IDs.txt", "r")
     temp = f.read().split("\n")
@@ -208,14 +209,15 @@ def load_feats():
     for id, index in zip(temp, range(0, len(temp))):
         CENTER_DICT[id] = index
     f.close()
+    global ALT_NPARR
+    global RIGHT_NPARR
+    global LEFT_NPARR
+    global CENTER_NPARR
     ALT_NPARR = np.load("/u/cs401/A1/feats/Alt_feats.dat.npy")
     RIGHT_NPARR = np.load("/u/cs401/A1/feats/Right_feats.dat.npy")
     LEFT_NPARR = np.load("/u/cs401/A1/feats/Left_feats.dat.npy")
     CENTER_NPARR = np.load("/u/cs401/A1/feats/Center_feats.dat.npy")
-    print(ALT_NPARR.shape)
-    print(RIGHT_NPARR.shape)
-    print(LEFT_NPARR.shape)
-    print(CENTER_NPARR.shape)
+
 def load_norms():
     bristo_norm = "/u/cs401/Wordlists/BristolNorms+GilhoolyLogie.csv"
     bristo_norm = "./Premade/BristolNorms+GilhoolyLogie.csv"
