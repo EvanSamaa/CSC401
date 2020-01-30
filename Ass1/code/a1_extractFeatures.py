@@ -167,7 +167,7 @@ def extract2(feats, comment_class, comment_id):
 
 def main(args):
 
-    f = open("/u/cs401/A1/feats/Alt_IDs", "r")
+    f = open("/u/cs401/A1/feats/Alt_IDs.txt", "r")
     print(f.read())
     A[2]
 
