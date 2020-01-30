@@ -180,7 +180,7 @@ def extract2(feats, comment_class, comment_id):
     elif comment_class == "Center":
         feat_per_comment = CENTER_NPARR[CENTER_DICT[comment_id],:]
 
-        print(feat_per_comment[:,28].shape)
+        print(feat_per_comment[0:28].shape)
         print(CENTER_NPARR[CENTER_DICT[comment_id],:].shape)
     elif comment_class == "Alt":
         feat_per_comment = ALT_NPARR[ALT_DICT[comment_id],:]
