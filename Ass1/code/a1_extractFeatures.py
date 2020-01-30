@@ -178,13 +178,13 @@ def extract2(feats, comment_class, comment_id):
     elif comment_class == "Right":
         feat_per_comment = RIGHT_NPARR[RIGHT_DICT[comment_id],:]
     elif comment_class == "Center":
-        feat_per_comment = CENTER_NPARR[CENTER_DICT[comment_id],:]
-
-        print(feat_per_comment[0:28].shape)
+        feat_per_comment = CENTER_NPARR[CENTER_DICT[comment_id], :]
         print(CENTER_NPARR[CENTER_DICT[comment_id],:].shape)
     elif comment_class == "Alt":
         feat_per_comment = ALT_NPARR[ALT_DICT[comment_id],:]
-    print(feat_per_comment)
+    feats = np.concatenate((feats[0:29], CENTER_NPARR[CENTER_DICT[comment_id], :]))
+    print(feats.shape)
+    print(feats)
     A[1]
 
 # loads the features ((N, 144) arrays) into the programs
