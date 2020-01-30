@@ -183,10 +183,7 @@ def extract2(feats, comment_class, comment_id):
     elif comment_class == "Alt":
         feat_per_comment = ALT_NPARR[ALT_DICT[comment_id],:]
     feats = np.concatenate((feats[0:29], CENTER_NPARR[CENTER_DICT[comment_id], :]))
-    print(feats.shape)
-    print(feats)
-    A[1]
-
+    return feats
 # loads the features ((N, 144) arrays) into the programs
 def load_feats():
     f = open("/u/cs401/A1/feats/Alt_IDs.txt", "r")
@@ -271,7 +268,6 @@ def main(args):
         feat_per_comment = extract1(data[i])
         feat_per_comment = extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
         feats[i, :] = np.append(feat_per_comment, classes[data[i]["cat"]])
-        # A[2]
     # data point. Add these to feats.
     # TODO: Use extract2 to copy LIWC features (features 30-173)
     # into feats. (Note that these rely on each data point's class,
