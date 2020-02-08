@@ -299,8 +299,8 @@ if __name__ == "__main__":
         mine = data['arr_0']
     with np.load("./sample_outputs/sample.npz") as data:
         sample = data['arr_0']
-    print(mine[1])
-    print(sample[1])
-    A[2]
+    # print(mine[1])
+    # print(sample[1])
+    # A[2]
     main(args)
 
