@@ -48,10 +48,14 @@ def extract1(comment):
     rtv = np.zeros((173,))
     # print(json.dumps(comment, indent=4))
     # 1. Count caps
-    for item in comment["originalBody"].split():
-        if not item.islower():
-            rtv[0] = rtv[0] + 1
-
+    try:
+        for item in comment["originalBody"].split():
+            if not item.islower():
+                rtv[0] = rtv[0] + 1
+    except:
+        for item in comment["body"].split():
+            if not item.split("/")[0].islower():
+                rtv[0] = rtv[0] + 1
     # 2,3,4. Count I, you, he
     tokens = comment["body"].split()
 
@@ -262,7 +266,7 @@ def main(args):
     feats = np.zeros((len(data), 173+1))
     #obtain dictionaries that contains the AOA and Warriner data
 
-    classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3, "sample_in.json":4}
+    classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3}
     for i in range (0, len(data)):
         feat_per_comment = extract1(data[i])
         print(i)
@@ -284,5 +288,17 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--a1_dir", help="Path to csc401 A1 directory. By default it is set to the cdf directory for the assignment.", default="/u/cs401/A1/")
     args = parser.parse_args()        
     # python3.7 a1_extractFeatures.py -i preproc.json -o feats.npz -p "/."
+
+    sample = None
+    mine = None
+    import sys
+    np.set_printoptions(threshold=sys.maxsize)
+    with np.load('sample_feat.npz') as data:
+        mine = data['arr_0']
+    with np.load("./sample_outputs/sample.npz") as data:
+        sample = data['arr_0']
+    print(mine)
+    print(sample)
+    A[2]
     main(args)
 
