@@ -50,11 +50,11 @@ def extract1(comment):
     # 1. Count caps
     try:
         for item in comment["originalBody"].split():
-            if not item.islower():
+            if (not item.islower()) and len(item) >= 3:
                 rtv[0] = rtv[0] + 1
     except:
         for item in comment["body"].split():
-            if not item.split("/")[0].islower():
+            if (not item.split("/")[0].islower()) and len(item) >= 3:
                 rtv[0] = rtv[0] + 1
     # 2,3,4. Count I, you, he
     tokens = comment["body"].split()
@@ -272,7 +272,7 @@ def main(args):
         # print(i)
         try:
             feat_per_comment = extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
-            print(feat_per_comment)
+            # print(feat_per_comment)
         except:
             print("failure to get feature ", data[i])
         feats[i, :] = np.append(feat_per_comment, classes[data[i]["cat"]])
@@ -295,10 +295,10 @@ if __name__ == "__main__":
     mine = None
     import sys
     np.set_printoptions(threshold=sys.maxsize)
-    # with np.load('sample_feats.npz') as data:
-    #     mine = data['arr_0']
-    # with np.load("./sample_outputs/sample.npz") as data:
-    #     sample = data['arr_0']
+    with np.load('sample_feats.npz') as data:
+        mine = data['arr_0']
+    with np.load("./sample_outputs/sample.npz") as data:
+        sample = data['arr_0']
     # print(mine[1])
     # print(sample[1])
     # A[2]
