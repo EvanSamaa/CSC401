@@ -50,11 +50,11 @@ def extract1(comment):
     # 1. Count caps
     try:
         for item in comment["originalBody"].split():
-            if (not item.islower()) and len(item) >= 3:
+            if item.isupper() and len(item) >= 3:
                 rtv[0] = rtv[0] + 1
     except:
         for item in comment["body"].split():
-            if (not item.split("/")[0].islower()) and len(item) >= 3:
+            if (item.split("/")[0].isupper()) and len(item) >= 3:
                 rtv[0] = rtv[0] + 1
     # 2,3,4. Count I, you, he
     tokens = comment["body"].split()
