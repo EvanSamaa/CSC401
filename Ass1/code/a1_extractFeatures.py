@@ -262,7 +262,7 @@ def main(args):
     feats = np.zeros((len(data), 173+1))
     #obtain dictionaries that contains the AOA and Warriner data
 
-    classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3}
+    classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3, "sample_in":4}
     for i in range (0, len(data)):
         feat_per_comment = extract1(data[i])
         print(i)
