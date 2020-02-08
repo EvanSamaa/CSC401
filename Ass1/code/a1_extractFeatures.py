@@ -166,8 +166,6 @@ def extract1(comment):
     # print(rtv)
     return rtv
 def extract2(feats, comment_class, comment_id):
-    print(comment_class)
-    print(comment_id)
     ''' This function adds features 30-173 for a single comment.
     Parameters:
         feats: np.array of length 173
@@ -178,6 +176,8 @@ def extract2(feats, comment_class, comment_id):
         function adds feature 30-173). This should be a modified version of 
         the parameter feats.
     '''
+    print(comment_class)
+    print(comment_id)
     print(LEFT_NPARR.shape)
     if comment_class == "Left":
         feat_per_comment = LEFT_NPARR[LEFT_DICT[comment_id],:]
