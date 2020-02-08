@@ -166,8 +166,9 @@ def extract1(comment):
     # print(rtv)
     return rtv
 def extract2(feats, comment_class, comment_id):
+    print(comment_class)
+    print(comment_id)
     ''' This function adds features 30-173 for a single comment.
-
     Parameters:
         feats: np.array of length 173
         comment_class: str in {"Alt", "Center", "Left", "Right"}
@@ -269,10 +270,10 @@ def main(args):
     classes = {"Left": 0, "Center": 1, "Right": 2, "Alt": 3}
     for i in range (0, len(data)):
         feat_per_comment = extract1(data[i])
-        print(i)
+        # print(i)
         try:
             feat_per_comment = extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
-            print(feat_per_comment)
+            # print(feat_per_comment)
         except:
             print("failure to get feature ", data[i])
         feats[i, :] = np.append(feat_per_comment, classes[data[i]["cat"]])
