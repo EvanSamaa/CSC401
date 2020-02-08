@@ -272,7 +272,7 @@ def main(args):
         # print(i)
         try:
             feat_per_comment = extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
-            # print(feat_per_comment)
+            print(feat_per_comment)
         except:
             print("failure to get feature ", data[i])
         feats[i, :] = np.append(feat_per_comment, classes[data[i]["cat"]])
