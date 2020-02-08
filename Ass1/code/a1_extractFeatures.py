@@ -54,7 +54,7 @@ def extract1(comment):
                 rtv[0] = rtv[0] + 1
     except:
         for item in comment["body"].split():
-            if (item.split("/")[0].isupper()) and len(item) >= 3:
+            if (item.split("/")[0].isupper()) and len(item.split("/")[0]) >= 3:
                 rtv[0] = rtv[0] + 1
     # 2,3,4. Count I, you, he
     tokens = comment["body"].split()
@@ -299,8 +299,8 @@ if __name__ == "__main__":
         mine = data['arr_0']
     with np.load("./sample_outputs/sample.npz") as data:
         sample = data['arr_0']
-    # print(mine[1])
-    # print(sample[1])
-    # A[2]
+    print(mine[1])
+    print(sample[1])
+    A[2]
     main(args)
 
