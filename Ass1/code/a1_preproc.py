@@ -50,7 +50,7 @@ def preproc1(comment , steps=range(1, 5)):
             modCom_list.append(word)
         modCom_list.append("\n")
     modComm = ""
-    modCom_list = modCom_list[:-1]
+    # modCom_list = modCom_list[:-1]
     for word in modCom_list:
         if word != "\n":
             modComm = modComm + word + " "
@@ -75,7 +75,7 @@ def main(args):
             else:
                 circular_end = end_index - len(data)
                 sub_data = data[start_index:]
-                sub_data = subdata + data[0:circular_end]
+                sub_data = sub_data + data[0:circular_end]
             # TODO: read those lines with something like `j = json.loads(line)`
             # TODO: choose to retain fields from those lines that are relevant to you
             for comment in sub_data:
@@ -102,12 +102,12 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--output", help="Directs the output to a filename of your choice", required=True)
     parser.add_argument("--max", help="The maximum number of comments to read from each file", type=int, default=10000)
     parser.add_argument("--a1_dir", help="The directory for A1. Should contain subdir data. Defaults to the directory for A1 on cdf.", default='/u/cs401/A1')
-    
     args = parser.parse_args()
-
     if (args.max > 200272):
         print( "Error: If you want to read more than 200,272 comments per file, you have to read them all." )
         sys.exit(1)
     
     indir = os.path.join(args.a1_dir, 'data')
     main(args)
+    # 1004192759 -o sample_out.json --a1_dir ./sample_in_puts
+    # 1004192759 -o sample_out.json
