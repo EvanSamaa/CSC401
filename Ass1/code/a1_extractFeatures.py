@@ -178,7 +178,7 @@ def extract2(feats, comment_class, comment_id):
         function adds feature 30-173). This should be a modified version of 
         the parameter feats.
     '''
-    print(LEFT_NPARR)
+    print(LEFT_NPARR.shape)
     if comment_class == "Left":
         feat_per_comment = LEFT_NPARR[LEFT_DICT[comment_id],:]
     elif comment_class == "Right":
@@ -290,7 +290,7 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--input", help="The input JSON file, preprocessed as in Task 1", required=True, default="preproc.json")
     parser.add_argument("-p", "--a1_dir", help="Path to csc401 A1 directory. By default it is set to the cdf directory for the assignment.", default="/u/cs401/A1/")
     args = parser.parse_args()
-    # python3.7 a1_extractFeatures.py -i ./sample_outputs/sample_out.json -o sample_feats.npz -p "/."
+    # python3.7 a1_extractFeatures.py -i ./sample_outputs/sample_out.json -o sample_feats.npz
     #
 
     sample = None
