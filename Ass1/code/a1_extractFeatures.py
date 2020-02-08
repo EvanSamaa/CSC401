@@ -273,7 +273,7 @@ def main(args):
         try:
             feat_per_comment = extract2(feat_per_comment, data[i]["cat"], data[i]["id"])
         except:
-            print(data[i])
+            print("failure to get feature ", data[i])
         feats[i, :] = np.append(feat_per_comment, classes[data[i]["cat"]])
     # data point. Add these to feats.
     # TODO: Use extract2 to copy LIWC features (features 30-173)
@@ -293,12 +293,12 @@ if __name__ == "__main__":
     mine = None
     import sys
     np.set_printoptions(threshold=sys.maxsize)
-    with np.load('sample_feat.npz') as data:
-        mine = data['arr_0']
-    with np.load("./sample_outputs/sample.npz") as data:
-        sample = data['arr_0']
-    # print(mine)
-    # print(sample)
+    # with np.load('sample_feats.npz') as data:
+    #     mine = data['arr_0']
+    # with np.load("./sample_outputs/sample.npz") as data:
+    #     sample = data['arr_0']
+    # print(mine[1])
+    # print(sample[1])
     # A[2]
     main(args)
 
