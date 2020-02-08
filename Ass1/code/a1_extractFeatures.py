@@ -177,8 +177,8 @@ def extract2(feats, comment_class, comment_id):
         the parameter feats.
     '''
     if comment_class == "Left":
-        print(LEFT_DICT[comment_id])
         feat_per_comment = LEFT_NPARR[LEFT_DICT[comment_id],:]
+        print(feat_per_comment.shape)
     elif comment_class == "Right":
         feat_per_comment = RIGHT_NPARR[RIGHT_DICT[comment_id],:]
     elif comment_class == "Center":
