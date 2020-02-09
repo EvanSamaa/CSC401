@@ -143,7 +143,7 @@ def extract1(comment):
         except:
             a=3
     for sentence in comment["body"].split("\n"):
-        print(sentence)
+        print("This is a sent", sentence)
         rtv[14] = rtv[14] + len(sentence.split())
     print("")
     rtv[14] = rtv[14]/len(comment["body"].split("\n"))
