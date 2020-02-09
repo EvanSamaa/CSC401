@@ -9,7 +9,6 @@ nlp = spacy.load('en_core_web_sm', disable=['parser', 'ner'])
 sentencizer = nlp.create_pipe("sentencizer")
 nlp.add_pipe(sentencizer)
 
-
 def preproc1(comment , steps=range(1, 5)):
     ''' This function pre-processes a single comment
     Parameters:                                                                      
@@ -26,7 +25,8 @@ def preproc1(comment , steps=range(1, 5)):
         # modComm = html.escape(modComm, quote=True)
         modComm = str(modComm.encode('ascii', 'xmlcharrefreplace')).encode('utf-8').decode('unicode_escape')[2:-1]
     if 3 in steps:  # remove URLs
-        modComm = re.sub(r"(http|http|www).*\s", "", modComm)
+        # modComm = re.sub(r"(http|http|www).*\s", "", modComm)
+        modComm = re.sub(r"(http|www)\S+", "", modComm)
     if 4 in steps:  # remove duplicate spaces
         modCom_list = modComm.split(" ")
         for item in modCom_list:
