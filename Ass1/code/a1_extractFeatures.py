@@ -17,9 +17,9 @@ SLANG = {
     'ppl', 'sob', 'ttyl', 'imo', 'ltr', 'thx', 'kk', 'omg', 'omfg', 'ttys',
     'afn', 'bbs', 'cya', 'ez', 'f2f', 'gtr', 'ic', 'jk', 'k', 'ly', 'ya',
     'nm', 'np', 'plz', 'ru', 'so', 'tc', 'tmi', 'ym', 'ur', 'u', 'sol', 'fml'}
-PUNCTUATION = {
+MOD_PUNCTUATION = {
     '$', '#', '"', '"', '(', ')', ',', '.', ':', 'XX', '``', "''", "-LRB-",
-    '-RRB-', 'ADD', 'AFX', 'HYPH'
+    '-RRB-', 'ADD', 'AFX', 'HYPH', "SYM"
 }
 AOA_IMG_FAM_DICT = {}
 WARRINER_DICT = {}
@@ -45,6 +45,11 @@ def extract1(comment):
         feats : numpy Array, a 173-length vector of floating point features (only the first 29 are expected to be filled, here)
     '''    
     # TODO: Extract features that rely on capitalization.
+    MOD_PUNCTUATION = {
+        '$', '#', '"', '"', '(', ')', ',', '.', ':', 'XX', '``', "''", "-LRB-",
+        '-RRB-', 'ADD', 'AFX', 'HYPH', "SYM"
+    }
+
     rtv = np.zeros((173,))
     # print(json.dumps(comment, indent=4))
     # 1. Count caps
@@ -71,12 +76,12 @@ def extract1(comment):
             rtv[6] = rtv[6] + 1
 
         # this helps detect multi-character punctuation that has 2 or more tokens
-        if prop_prev in PUNCTUATION and prop_after in PUNCTUATION and punc_counter == 0:
+        if prop_prev in MOD_PUNCTUATION and prop_after in MOD_PUNCTUATION and punc_counter == 0:
             punc_counter = 2
         elif punc_counter == -1:
             rtv[7] = rtv[7] + 1
         elif punc_counter >= 2:
-            if prop_after in PUNCTUATION:
+            if prop_after in MOD_PUNCTUATION:
                 punc_counter = punc_counter + 1
             elif punc_counter >= 2:
                 punc_counter = -1
@@ -88,8 +93,18 @@ def extract1(comment):
     a_mean_arr = np.array((0,))
     d_mean_arr = np.array((0,))
     for token in tokens:
-        word = token.split("/")[0].lower()
-        prop = token.split("/")[1]
+        word = ""
+        add_yet = False
+        for character in reversed(token):
+            if add_yet:
+                word = character + word
+            if character == '/':
+                add_yet = True
+        prop = token.split("/")[-1]
+        word = word.lower()
+        # print("prop", prop)
+        # print("word", word)
+        # print("")
         if word in SECOND_PERSON_PRONOUNS:
             rtv[2] = rtv[2] + 1
         if prop == "PRP":
@@ -122,13 +137,13 @@ def extract1(comment):
         elif word in SLANG:
             rtv[13] = rtv[13] + 1
         # count average token length
-        if not prop in PUNCTUATION:
+        if not prop in MOD_PUNCTUATION:
             rtv[15] = rtv[15] + len(word)
             word_count = word_count + 1
         # get AOA, IMG and FAM
         try:
             scores = AOA_IMG_FAM_DICT[word]
-            print(scores)
+            # print(scores)
             aoa_arr = np.append(aoa_arr, scores[0])
             img_arr = np.append(img_arr, scores[1])
             fam_arr = np.append(fam_arr, scores[2])
@@ -147,7 +162,7 @@ def extract1(comment):
     rtv[14] = rtv[14]/(len(comment["body"].split("\n"))-1)
     # calculate avg
     rtv[15] = rtv[15]/word_count
-    rtv[16] = len(comment["body"].split("\n"))
+    rtv[16] = len(comment["body"].split("\n")) - 1
     if aoa_arr.shape[0] != 1:
         rtv[17] = np.average(aoa_arr[1:])
         rtv[18] = np.average(img_arr[1:])
@@ -299,8 +314,8 @@ if __name__ == "__main__":
         mine = data['arr_0']
     with np.load("./sample_outputs/sample.npz") as data:
         sample = data['arr_0']
-    # print(mine[1])
-    # print(sample[1])
+    # print(mine[2])
+    # print(sample[2])
     # A[2]
     main(args)
 
