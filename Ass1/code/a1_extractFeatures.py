@@ -159,9 +159,11 @@ def extract1(comment):
             a=3
     for sentence in comment["body"].split("\n"):
         rtv[14] = rtv[14] + len(sentence.split())
-    rtv[14] = rtv[14]/(len(comment["body"].split("\n"))-1)
+    if len(comment["body"].split("\n"))-1 != 0:
+        rtv[14] = rtv[14]/(len(comment["body"].split("\n"))-1)
     # calculate avg
-    rtv[15] = rtv[15]/word_count
+    if word_count != 0:
+        rtv[15] = rtv[15]/word_count
     rtv[16] = len(comment["body"].split("\n")) - 1
     if aoa_arr.shape[0] != 1:
         rtv[17] = np.average(aoa_arr[1:])
