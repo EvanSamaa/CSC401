@@ -143,10 +143,10 @@ def extract1(comment):
         except:
             a=3
     for sentence in comment["body"].split("\n"):
-        print("This is a sent", sentence)
+        print(sentence)
         rtv[14] = rtv[14] + len(sentence.split())
-    print("")
-    rtv[14] = rtv[14]/len(comment["body"].split("\n"))
+        print(len(sentence.split()))
+    rtv[14] = rtv[14]/(len(comment["body"].split("\n"))-1)
     # calculate avg
     rtv[15] = rtv[15]/word_count
     rtv[16] = len(comment["body"].split("\n"))
