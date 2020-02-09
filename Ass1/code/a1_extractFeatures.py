@@ -133,7 +133,7 @@ def extract1(comment):
             img_arr = np.append(img_arr, scores[1])
             fam_arr = np.append(fam_arr, scores[2])
         except:
-            pass
+            a=2
         # get the other scores
         try:
             scores = WARRINER_DICT[word]
@@ -141,9 +141,11 @@ def extract1(comment):
             a_mean_arr = np.append(a_mean_arr, scores[1])
             d_mean_arr = np.append(d_mean_arr, scores[2])
         except:
-            pass
+            a=3
     for sentence in comment["body"].split("\n"):
+        print(sentence)
         rtv[14] = rtv[14] + len(sentence.split())
+    print("")
     rtv[14] = rtv[14]/len(comment["body"].split("\n"))
     # calculate avg
     rtv[15] = rtv[15]/word_count
