@@ -1,0 +1,52 @@
+Results for SGDClassifier:
+	Accuracy: 0.3603
+	Recall: [0.7562, 0.2748, 0.3327, 0.0847]
+	Precision: [0.3379, 0.3414, 0.472, 0.3092]
+	Confusion Matrix: 
+[[1495  260  128   94]
+ [1067  551  274  113]
+ [ 841  318  665  175]
+ [1021  485  342  171]]
+
+Results for GaussianNB:
+	Accuracy: 0.3473
+	Recall: [0.2772, 0.8145, 0.1886, 0.109]
+	Precision: [0.5996, 0.2935, 0.4603, 0.3129]
+	Confusion Matrix: 
+[[ 548 1184  146   99]
+ [  89 1633  129  154]
+ [ 182 1210  377  230]
+ [  95 1537  167  220]]
+
+Results for RandomForestClassifier:
+	Accuracy: 0.4136
+	Recall: [0.5392, 0.381, 0.5683, 0.1699]
+	Precision: [0.521, 0.3567, 0.4046, 0.3416]
+	Confusion Matrix: 
+[[1066  361  388  162]
+ [ 362  764  584  295]
+ [ 295  364 1136  204]
+ [ 323  653  700  343]]
+
+Results for MLPClassifier:
+	Accuracy: 0.4361
+	Recall: [0.5316, 0.4384, 0.5403, 0.2372]
+	Precision: [0.569, 0.3696, 0.433, 0.3739]
+	Confusion Matrix: 
+[[1051  430  318  178]
+ [ 276  879  504  346]
+ [ 283  358 1080  278]
+ [ 237  711  592  479]]
+
+Results for AdaBoostClassifier:
+	Accuracy: 0.4395
+	Recall: [0.5529, 0.3895, 0.4837, 0.3343]
+	Precision: [0.5637, 0.3578, 0.474, 0.3672]
+	Confusion Matrix: 
+[[1093  374  255  255]
+ [ 313  781  392  519]
+ [ 295  348  967  389]
+ [ 238  680  426  675]]
+
+From the result, it is shown that the ada boost classfier is able to generate the highest overall accuracy.
+Another notable result is that the Gaussian classifieris able to achieve a 80% recall when identifying the "Center" class.

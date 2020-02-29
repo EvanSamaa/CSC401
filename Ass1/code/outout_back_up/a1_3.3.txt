@@ -1,0 +1,47 @@
+5 p-values: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0003, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.4363, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1089, 0.0, 0.0, 0.0, 0.0, 0.1549, 0.0, 0.0, 0.0, 0.0, 0.2562, 0.001, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2398, 0.0, 0.0, 0.0195, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0136, 0.0, 0.0, 0.0001, 0.0, 0.0, 0.0005, 0.0, 0.0, 0.0, 0.0004, 0.0, 0.0, 0.0, 0.0004, 0.0011, 0.0, 0.0, 0.0, 0.0005, 0.0, 0.014, 0.0, 0.0038, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6707, 0.0056, 0.0, 0.0014, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0537, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+50 p-values: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0003, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.4363, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1089, 0.0, 0.0, 0.0, 0.0, 0.1549, 0.0, 0.0, 0.0, 0.0, 0.2562, 0.001, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2398, 0.0, 0.0, 0.0195, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0136, 0.0, 0.0, 0.0001, 0.0, 0.0, 0.0005, 0.0, 0.0, 0.0, 0.0004, 0.0, 0.0, 0.0, 0.0004, 0.0011, 0.0, 0.0, 0.0, 0.0005, 0.0, 0.014, 0.0, 0.0038, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6707, 0.0056, 0.0, 0.0014, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0537, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Accuracy for 1k: 0.3402
+Accuracy for full dataset: 0.3614
+Chosen feature intersection: [1, 2, 83, 149]
+Top-5 at higher: [1, 2, 83, 96, 149]
+
+3.5 a)
+
+The top five features are [
+    Number of first-person pronouns,
+    Number of second-person pronouns,
+    liwc_motion,
+    receptiviti_intellectual
+]
+
+The number of first-person pronouns can be interpreted as a measure of how subjective a comment may be, which could be
+indicative for politcal views. (For example alternative view comments might be more subjective, center more objective)
+
+The number of second-person pronoun can be interpreted as a metric of how the user interact with other community members.
+For example, a user with a Left view might be more open-minded for other opinions (e.g. "What do you think about it?", "I
+ agree with you."), while a user with a conservative might interact less with others.
+
+The measure of liwc_motion are words like: Go, car, fly. This can be see as a indication of how proactive a person is,
+which can be related to political belief. i.e. conspiracist (Alt belives) might not be very proactive.
+
+The measure of receptiviti_intellectual measures how intellectual a sentence is, which can also be traits of people with
+a certain political belief.
+
+3.5 b)
+
+p-value measures how likely a sample is lying at the extremes, when assuming a distribution. For this reason, given a
+larger and dataset, there will be more extremes, therefore the larger dataset (32k) would have higher p-values.
+
+3.5 c)
+
+The top five features are [
+    Number of first-person pronouns,
+    Number of second-person pronouns,
+    liwc_relativ.
+    liwc_motion,
+    receptiviti_intellectual
+]
+
+The words largely overlaps with 3.5 a) with the addition of relativity, which are words like area, bend and go. This might
+describe traits similarly to liwc_motion.
+

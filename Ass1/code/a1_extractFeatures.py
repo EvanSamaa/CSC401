@@ -308,14 +308,14 @@ if __name__ == "__main__":
     # python3.7 a1_extractFeatures.py -i ./sample_outputs/sample_out.json -o sample_feats.npz
     #
 
-    sample = None
-    mine = None
-    import sys
-    np.set_printoptions(threshold=sys.maxsize)
-    with np.load('sample_feats.npz') as data:
-        mine = data['arr_0']
-    with np.load("./sample_outputs/sample.npz") as data:
-        sample = data['arr_0']
+    # sample = None
+    # mine = None
+    # import sys
+    # np.set_printoptions(threshold=sys.maxsize)
+    # with np.load('feats.npz') as data:
+    #     mine = data['arr_0']
+    # with np.load("./sample_outputs/sample.npz") as data:
+    #     sample = data['arr_0']
     # print(mine[2])
     # print(sample[2])
     # A[2]
